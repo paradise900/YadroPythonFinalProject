@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     PAGINATION_MAX_LIMIT: int = 100
 
     class Config:
-        env_file = '.env'
+        env_file = ".env"
 
 @lru_cache
 def get_settings() -> Settings:
