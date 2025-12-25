@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Molecules Database</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🧪 Molecules Database</h1>
+      <p>Управление химическими соединениями и субструктурный поиск</p>
+    </header>
+
+    <!-- Уведомления -->
+    <div id="notifications"></div>
+
+    <!-- Добавление молекулы -->
+    <section class="card">
+      <h2>Добавить молекулу</h2>
+      <form id="addForm" onsubmit="event.preventDefault(); addMolecule();">
+        <div class="form-group">
+          <label for="smiles">SMILES *</label>
+          <input type="text" id="smiles" placeholder="CCO" required>
+          <small>Например: CCO (этанол), c1ccccc1 (бензол)</small>
+        </div>
+        <div class="form-group">
+          <label for="name">Название</label>
+          <input type="text" id="name" placeholder="Ethanol">
+        </div>
+        <div class="form-group">
+          <label for="id">UUID (опционально)</label>
+          <input type="text" id="id" placeholder="Автогенерация">
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить</button>
+      </form>
+    </section>
+
+    <!-- Список молекул -->
+    <section class="card">
+      <div class="card-header">
+        <h2>Список молекул</h2>
+        <button onclick="loadMolecules()" class="btn btn-secondary">🔄 Обновить</button>
+      </div>
+      <div id="moleculesTable"></div>
+    </section>
+
+    <!-- Субструктурный поиск -->
+    <section class="card">
+      <h2>Субструктурный поиск</h2>
+      <form id="searchForm" onsubmit="event.preventDefault(); searchMolecules();">
+        <div class="form-group">
+          <label for="substructure">Субструктура (SMILES) *</label>
+          <input type="text" id="substructure" placeholder="c1ccccc1" required>
+          <small>Найти все молекулы, содержащие эту субструктуру</small>
+        </div>
+        <button type="submit" class="btn btn-primary">🔍 Искать</button>
+      </form>
+      <div id="searchResults"></div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

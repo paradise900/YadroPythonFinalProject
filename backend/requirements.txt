@@ -1,0 +1,14 @@
+fastapi>=0.110
+uvicorn[standard]>=0.23
+sqlalchemy>=2.0
+psycopg2-binary>=2.9
+alembic>=1.13
+redis>=5.0
+celery>=5.3
+rdkit>=2022.9.5
+pydantic>=2.5
+pydantic-settings>=2.0
+httpx>=0.24
+pytest>=7.4
+pytest-cov>=4.1
+fakeredis>=2.21
