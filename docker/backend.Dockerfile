@@ -12,14 +12,10 @@ WORKDIR /app
 RUN apt-get update && \
     apt-get install -y --no-install-recommends netcat-openbsd curl && \
     rm -rf /var/lib/apt/lists/*
-
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 
 COPY --from=builder /wheels /wheels
-RUN pip install --no-cache-dir /wheels/* && \
-    rm -rf /wheels && \
-    pip cache purge
+RUN pip install --no-cache-dir /wheels/* && rm -rf /wheels && pip cache purge
 
 COPY backend /app
 

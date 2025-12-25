@@ -9,8 +9,8 @@ echo "PostgreSQL started"
 
 cd /app
 
-echo "Creating database tables..."
-python -m app.init_db
+echo "Running migrations..."
+alembic upgrade head
 
 echo "Starting application..."
 exec uvicorn app.main:app --host 0.0.0.0 --port 8000
