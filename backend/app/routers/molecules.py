@@ -61,11 +61,16 @@ def _search_impl(substructure: str, limit: int, offset: int, items: list[dict]) 
     return matches[offset: offset + limit]
 
 @router.post("/search", response_model=schemas.SearchResponse, status_code=200)
-def search(req: schemas.SearchRequest,
-           db: Session = Depends(get_db),
-           limit: int = Query(default=settings.PAGINATION_DEFAULT_LIMIT, ge=1, le=settings.PAGINATION_MAX_LIMIT),
-           offset: int = Query(default=0, ge=0)):
+def search(
+    req: schemas.SearchRequest,
+    db: Session = Depends(get_db),
+    limit: int = Query(default=settings.PAGINATION_DEFAULT_LIMIT, ge=1, le=settings.PAGINATION_MAX_LIMIT),
+    offset: int = Query(default=0, ge=0),
+):
     _, items = crud.list_molecules(db, offset=0, limit=10_000_000)
-    objects = [{"id": m.id, "smiles": m.smiles, "name": m.name} for m in items]
+    objects = [
+        {"id": str(m.id), "smiles": m.smiles, "name": m.name}
+        for m in items
+    ]
     matches = _search_impl(req.substructure, limit, offset, objects)
     return {"matches": matches}

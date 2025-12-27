@@ -8,6 +8,7 @@ done
 echo "PostgreSQL started"
 
 cd /app
+alembic upgrade head
 
 echo "Running migrations..."
 alembic upgrade head
